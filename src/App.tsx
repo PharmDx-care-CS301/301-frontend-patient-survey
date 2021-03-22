@@ -2,9 +2,15 @@ import React from 'react';
 import * as Survey from "survey-react";
 import ReactDOM from "react-dom";
 import './App.css';
-import "survey-react/survey.css"
+import "survey-react/survey.css";
+import * as widgets from "surveyjs-widgets";
+import "jquery-ui/ui/widgets/datepicker.js";
+import $ from "jquery";
+import "jquery-ui/themes/base/all.css";
 
 function App() {
+  widgets.jqueryuidatepicker(Survey, $);
+
   let json = {
     "title": "PharmDx Patient survey",
     "logoPosition": "top",
@@ -47,7 +53,9 @@ function App() {
        {
         "type": "datepicker",
         "name": "Schedule Date",
-        "title": "If you have any questions or concerns and would like to manually schedule a follow up appointment: "
+        "title": "If you have any questions or concerns and would like to manually schedule a follow up appointment: ",
+         "inputType": "date",
+         "dateFormat": "mm/dd/yy"
        },
        {
         "type": "dropdown",
