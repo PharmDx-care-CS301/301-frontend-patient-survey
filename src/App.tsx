@@ -55,7 +55,9 @@ function App() {
         "name": "Schedule Date",
         "title": "If you have any questions or concerns and would like to manually schedule a follow up appointment: ",
          "inputType": "date",
-         "dateFormat": "mm/dd/yy"
+         "dateFormat": "mm/dd/yy",
+         "maxDate": "14",
+         "minDate": "0"
        },
        {
         "type": "dropdown",
