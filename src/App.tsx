@@ -11,8 +11,20 @@ import "jquery-ui/themes/base/all.css";
 function App() {
   widgets.jqueryuidatepicker(Survey, $);
 
+  var defaultThemeColors = Survey
+    .StylesManager
+    .ThemeColors["default"];
+   
+  defaultThemeColors["$main-color"] = "#2d9cdb";
+  defaultThemeColors["$main-hover-color"] = "#9b51e0";
+
+  Survey
+    .StylesManager
+    .applyTheme();
+
   let json = {
     "title": "PharmDx Patient survey",
+    "logo": "https://i.imgur.com/dhN1nfW.png",
     "logoPosition": "top",
     "pages": [
      {
@@ -22,6 +34,7 @@ function App() {
         "type": "checkbox",
         "name": "Symptoms",
         "title": "Please select any symptoms or side effects you are experiencing",
+        "colCount": 4,
         "choices": [
          {
           "value": "item1",
@@ -85,6 +98,7 @@ function App() {
      }
     ]
    };
+
    var surveyRender = <Survey.Survey json={json} />;
    return (
     <div className="App">
