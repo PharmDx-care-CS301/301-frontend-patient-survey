@@ -75,6 +75,22 @@ function LoginPage() {
             marginTop: 15,
           }}
         />
+        <TextField
+          required
+          id="outlined-basic"
+          name="DOB"
+          label="Date of Birth"
+          type="dob"
+          variant="outlined"
+          style={{
+            height: 60,
+            width: 302,
+            padding: 0,
+            paddingBottom: 0,
+            marginBottom: 15,
+            marginTop: 15,
+          }}
+        />
 
         <Button
           type="submit"
