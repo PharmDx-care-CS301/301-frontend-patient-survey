@@ -1,0 +1,8 @@
+type Survey @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  survey_data: AWSJSON
+  follow_up_id: ID
+  status: String
+  dob: AWSDate
+}
+ 

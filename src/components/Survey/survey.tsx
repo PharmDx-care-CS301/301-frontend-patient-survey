@@ -5,8 +5,47 @@ import * as widgets from "surveyjs-widgets";
 import "jquery-ui/ui/widgets/datepicker.js";
 import $ from "jquery";
 import "jquery-ui/themes/base/all.css";
+import {createSurvey, updateSurvey} from '../../graphql/mutations';
+import { useSnackbar } from "notistack";
+import { API } from "aws-amplify";
+import * as qs from "query-string";
 
-function SurveyPage() {
+
+
+function SurveyPage(props) {
+
+  // const { enqueueSnackbar } = useSnackbar();
+  //
+  // const displayError = (message) => {
+  //   enqueueSnackbar(<p>{message}</p>, {
+  //     variant: "error",
+  //   });
+  // };
+
+  const parsed = qs.parse(window.location.search);
+
+  const onComplete = async (result) => {
+    console.log("Result JSON:\n" + JSON.stringify(result.data, null, 3));
+    // console.log(props.id)
+    const surveyData = {
+      survey_data: JSON.stringify(result.data, null, 3),
+      id: props['id'],
+      dob: '2002-02-02',
+      status: 'COMPLETED'
+    };
+    try {
+      let ret = await API.graphql({
+        query: updateSurvey,
+        variables: {input: surveyData},
+      });
+    } catch (e) {
+      if (e.errors != undefined) {
+        // displayError(e.errors[0].message);
+      }
+    } finally {
+    }
+  }
+
 
   widgets.jqueryuidatepicker(Survey, $);
 
@@ -36,23 +75,23 @@ function SurveyPage() {
             "colCount": 4,
             "choices": [
               {
-                "value": "item1",
+                "value": "Dizziness",
                 "text": "Dizziness"
               },
               {
-                "value": "item2",
+                "value": "Drowsiness",
                 "text": "Drowsiness"
               },
               {
-                "value": "item3",
+                "value": "Fatigue",
                 "text": "Fatigue"
               },
               {
-                "value": "item4",
+                "value": "Nausea and vomiting",
                 "text": "Nausea and vomiting"
               },
               {
-                "value": "item5",
+                "value": "Rash",
                 "text": "Rash"
               }
             ]
@@ -100,9 +139,10 @@ function SurveyPage() {
     ]
   };
 
-  var surveyRender = <Survey.Survey json={json}/>;
+  var surveyRender = <Survey.Survey onComplete={onComplete} json={json}/>;
   return (
     <div className="App">
+      {props.id}
       {surveyRender}
     </div>
   )

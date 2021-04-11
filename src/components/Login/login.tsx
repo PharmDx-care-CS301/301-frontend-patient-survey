@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../../logo.png";
 import { useHistory } from "react-router-dom";
+import * as qs from 'query-string';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +33,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginPage() {
+function LoginPage(props: any) {
   const history = useHistory();
+  const [dob, setDob] = useState('');
+  const parsed = qs.parse(window.location.search);
 
   function loginToSurvey(event) {
     // If implementing survey code submission ourselves, add here
-    history.push("/survey");
+
+    // history.push("/survey");
+      console.log(dob, props.dob)
+      if (dob === props.dob) {
+          console.log('correct')
+          props.checker(true)
+      }
+  }
+
+  const changeDob = (event) => {
+      setDob(event.target.value);
   }
 
   const classes = useStyles();
@@ -82,6 +95,7 @@ function LoginPage() {
           label="Date of Birth"
           type="dob"
           variant="outlined"
+          onBlur={changeDob}
           style={{
             height: 60,
             width: 302,
