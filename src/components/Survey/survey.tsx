@@ -10,8 +10,6 @@ import { useSnackbar } from "notistack";
 import { API } from "aws-amplify";
 import * as qs from "query-string";
 
-
-
 function SurveyPage(props) {
 
   // const { enqueueSnackbar } = useSnackbar();
@@ -25,12 +23,17 @@ function SurveyPage(props) {
   const parsed = qs.parse(window.location.search);
 
   const onComplete = async (result) => {
-    console.log("Result JSON:\n" + JSON.stringify(result.data, null, 3));
-    // console.log(props.id)
+    const surveyDataInputs = JSON.stringify({
+      "Added Symptoms": result.data["Added Symptoms"],
+      "Symptoms": result.data["Symptoms"],
+      "Schedule Date": result.data["Schedule Date"],
+      "Schedule Time": result.data["Schedule Time"],
+      "Added comments": result.data["Added comments"]
+    })
+
     const surveyData = {
-      survey_data: JSON.stringify(result.data, null, 3),
+      survey_data: surveyDataInputs,
       id: props['id'],
-      dob: '2002-02-02',
       status: 'COMPLETED'
     };
     try {

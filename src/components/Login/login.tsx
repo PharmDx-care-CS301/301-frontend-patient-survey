@@ -42,10 +42,12 @@ function LoginPage(props: any) {
     // If implementing survey code submission ourselves, add here
 
     // history.push("/survey");
-      console.log(dob, props.dob)
+    //   console.log(dob, props.dob)
       if (dob === props.dob) {
-          console.log('correct')
           props.checker(true)
+      }
+      else {
+
       }
   }
 
@@ -72,22 +74,6 @@ function LoginPage(props: any) {
         alignItems="center"
         display="flex"
       >
-        <TextField
-          required
-          id="outlined-basic"
-          name="survey-code"
-          label="Survey Code"
-          type="survey-code"
-          variant="outlined"
-          style={{
-            height: 60,
-            width: 302,
-            padding: 0,
-            paddingBottom: 0,
-            marginBottom: 15,
-            marginTop: 15,
-          }}
-        />
         <TextField
           required
           id="outlined-basic"
