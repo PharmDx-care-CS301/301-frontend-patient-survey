@@ -23,25 +23,29 @@ function SurveyPage(props) {
   const parsed = qs.parse(window.location.search);
 
   const onComplete = async (result) => {
-    const surveyDataInputs = JSON.stringify({
+    const surveyDataInputs = {
       "Added Symptoms": result.data["Added Symptoms"],
       "Symptoms": result.data["Symptoms"],
       "Schedule Date": result.data["Schedule Date"],
       "Schedule Time": result.data["Schedule Time"],
       "Added comments": result.data["Added comments"]
-    })
+    }
+    console.log(surveyDataInputs)
+    console.log(JSON.stringify(surveyDataInputs))
 
     const surveyData = {
-      survey_data: surveyDataInputs,
+      survey_data: JSON.stringify(surveyDataInputs),
       id: props['id'],
       status: 'COMPLETED'
     };
     try {
-      let ret = await API.graphql({
+      const ret = await API.graphql({
         query: updateSurvey,
         variables: {input: surveyData},
       });
+      console.log(ret)
     } catch (e) {
+      console.log("error:", e)
       if (e.errors != undefined) {
         // displayError(e.errors[0].message);
       }
