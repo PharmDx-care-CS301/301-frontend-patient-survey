@@ -23,18 +23,18 @@ function SurveyPage(props) {
   const parsed = qs.parse(window.location.search);
 
   const onComplete = async (result) => {
-    const surveyDataInputs = {
-      "Added Symptoms": result.data["Added Symptoms"],
-      "Symptoms": result.data["Symptoms"],
-      "Schedule Date": result.data["Schedule Date"],
-      "Schedule Time": result.data["Schedule Time"],
-      "Added comments": result.data["Added comments"]
-    }
-    console.log(surveyDataInputs)
-    console.log(JSON.stringify(surveyDataInputs))
+    // const surveyDataInputs = {
+    //   "Added Symptoms": result.data["Added Symptoms"],
+    //   "Symptoms": result.data["Symptoms"],
+    //   "Schedule Date": result.data["Schedule Date"],
+    //   "Schedule Time": result.data["Schedule Time"],
+    //   "Added comments": result.data["Added comments"]
+    // }
+    // console.log(surveyDataInputs)
+    // console.log(JSON.stringify(surveyDataInputs))
 
     const surveyData = {
-      survey_data: JSON.stringify(surveyDataInputs),
+      survey_data: JSON.stringify(result.data),
       id: props['id'],
       status: 'COMPLETED'
     };
