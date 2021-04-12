@@ -123,15 +123,15 @@ function SurveyPage(props) {
             "title": "What time of day would you like to schedule your appointment for?",
             "choices": [
               {
-                "value": "item1",
+                "value": "Morning(8am-12pm)",
                 "text": "Morning(8am-12pm)"
               },
               {
-                "value": "item2",
+                "value": "Afternoon(1pm-5pm)",
                 "text": "Afternoon(1pm-5pm)"
               },
               {
-                "value": "item3",
+                "value": "Evening(6pm-8pm)",
                 "text": "Evening(6pm-8pm)"
               }
             ]
